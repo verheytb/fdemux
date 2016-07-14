@@ -63,16 +63,16 @@ def worker(sequence):
     # checks sense strand
     results = []
     for fcode, rcode in barcodes:
-        if fuzzySubstring(fcode.seq, sequence.seq) <= args.fuzziness and fuzzySubstring(rcode.seq,
-                                                                                        sequence.seq) <= args.fuzziness:
+        if fuzzySubstring(fcode.seq, sequence.seq) <= args.fuzziness and\
+                        fuzzySubstring(rcode.seq, sequence.seq) <= args.fuzziness:
             results.append([fcode, rcode])
 
     # checks antisense strand
     rcresults = []
     rcsequence = sequence.reverse_complement(id=sequence.id + "_rc", name="", description="")
     for fcode, rcode in barcodes:
-        if fuzzySubstring(fcode.seq, sequence.seq) <= args.fuzziness and fuzzySubstring(rcode.seq,
-                                                                                        sequence.seq) <= args.fuzziness:
+        if fuzzySubstring(fcode.seq, rcsequence.seq) <= args.fuzziness and\
+                        fuzzySubstring(rcode.seq, rcsequence.seq) <= args.fuzziness:
             rcresults.append([fcode, rcode])
 
     counter.increment()
